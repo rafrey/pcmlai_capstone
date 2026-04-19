@@ -53,7 +53,7 @@ if [[ "$(uname -s)" == "Linux" ]] && [[ "$probe_output" =~ (Cannot\ dlopen\ some
     echo "Re-checking TensorFlow GPU library loading after CUDA fixup"
     # shellcheck disable=SC1091
     source "$venv_dir/bin/activate"
-    if python -c "$probe_command"; then
+    if "$python_bin" -c "$probe_command"; then
         echo "TensorFlow probe succeeded after CUDA fixup."
         exit 0
     fi
