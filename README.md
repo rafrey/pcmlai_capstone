@@ -34,17 +34,29 @@ Instead of falling into the "analysis paralysis" common in massive government da
 2. Strictly prevents data leakage from exploration into the Keras models.
 3. Eliminates costly data re-computation during iterative deep learning validation loops.
 
+## Research Results
+
+### EDA & Data Preparation Results
+During the Data Understanding and Preparation phases (Section 5 of `capstone.ipynb`), several critical macroeconomic insights emerged that validate the necessity for a Deep Learning approach:
+
+* **The "Hidden Poor":** Baseline evaluations against the legacy Official Poverty Measure (OPM) identified that over **25% of the impoverished population** in our dataset are technically classified as "above poverty." However, when accounting for localized housing, health, and broadband costs, these households functionally possess a **negative residual income**.
+* **The "In-Kind Paradox" & Benefit Cliffs:** Bivariate analysis exposed severe welfare cliffs. SNAP (food stamp) utilization clusters tightly at the lowest incomes. As nominal income marginally exceeds aid thresholds, the automatic loss of benefits forces the entire burden of a rigid housing cost floor onto the household, resulting in an abrupt net-negative shift in true purchasing power.
+* **Non-Linear Capability Gaps:** Statistical tests using Dummy (MAPE > 312%) and Linear Regression (MAPE > 87%) baselines failed structurally. Linear models fail because financial decay is not a straight line; it features abrupt cliffs tied to fixed costs and aid disqualification. This scientifically justifies the deployment of Keras Neural Networks to capture these non-linear capability boundaries.
+* **The Minimal Feature Set:** Feature engineering proved that a strictly limited 12-variable tensor (including income, housing costs, broadband/health status, and OECD-modified family size) is sufficient for high-fidelity capability monitoring. This directly addresses policy concerns regarding "administrative burden" by proving that modernizing poverty measurement does not require sweeping data collection.
+
 ## Workspace Structure
 
 This repository is strictly organized to map data flows cleanly across the CRISP-DM methodology:
 
 * **`data/`**: Ignored in Version Control. Contains `raw/` Census downloads and `clean/` sterilized matrices.
 * **`models/`**: Stores output weights and `.keras` architectures generated natively by Phase 4.
+* **`scripts/`**: Directory containing cross-platform environment setup utilities (e.g., `install-dependencies.sh`, `install-dependencies.ps1`) and the TensorFlow CUDA repair script (`fix_tf_cuda_venv.sh`).
+* **`requirements.txt`**: Configuration file for Python dependencies to ensure deterministic pip/uv installations.
 * **`capstone.ipynb`**: Jupyter notebook representing the full CRISP-DM lifecycle of the first iteration of this research (prototype)
 
 ## Recommended Environment
 
-This project was developed on WSL2 running Ubuntu. That is the reference environment for the notebook, TensorFlow, and the GPU repair workflow in this repository.
+This project was developed on WSL2 running Ubuntu using Python 3.13.7 for the Jupyter kernel. That is the reference environment for the notebook, TensorFlow, and the GPU repair workflow in this repository.
 
 If Linux is not your native OS, use Ubuntu as the fallback environment. For Windows users, prefer WSL2 with Ubuntu for GPU work. For macOS users, prefer an Ubuntu VM if you want the closest match to the development environment used for this project.
 
