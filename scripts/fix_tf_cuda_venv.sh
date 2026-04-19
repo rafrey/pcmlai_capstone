@@ -137,7 +137,7 @@ cuda_env_file="$venv_dir/lib/tensorflow-cuda-paths.sh"
 } >"$cuda_env_file"
 
 activate_file="$venv_dir/bin/activate"
-python3 - <<'PY' "$activate_file" "$cuda_env_file"
+"$python_bin" - <<'PY' "$activate_file" "$cuda_env_file"
 from pathlib import Path
 import sys
 
