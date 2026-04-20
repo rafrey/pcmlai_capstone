@@ -64,8 +64,9 @@ $$
 
 This repository is strictly organized to map data flows cleanly across the CRISP-DM methodology:
 
-* **`data/`**: Ignored in Version Control. Contains `raw/` Census downloads and `clean/` sterilized matrices.
-* **`models/`**: Stores output weights and `.keras` architectures generated natively by Phase 4.
+* **`data/`**: (Ignored via `.gitignore`) Contains `raw/` Census downloads and `clean/` sterilized matrices.
+* **`logs/`**: (Ignored via `.gitignore`) Stores TensorBoard execution logs and Hyperband tuning checkpoints from Phase 4.
+* **`models/`**: (Ignored via `.gitignore`) Stores output weights and `.keras` architectures generated natively by Phase 4.
 * **`scripts/`**: Directory containing cross-platform environment setup utilities (e.g., `install-dependencies.sh`, `install-dependencies.ps1`) and the TensorFlow CUDA repair script (`fix_tf_cuda_venv.sh`).
 * **`requirements.txt`**: Configuration file for Python dependencies to ensure deterministic pip/uv installations.
 * **`capstone.ipynb`**: Jupyter notebook representing the full CRISP-DM lifecycle of the first iteration of this research (prototype)
