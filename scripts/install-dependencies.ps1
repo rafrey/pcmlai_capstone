@@ -16,7 +16,7 @@ if (-not $uvCommand) {
 }
 
 Write-Host "Creating or refreshing virtual environment at $venvDir"
-& uv venv --allow-existing $venvDir
+& uv venv --python 3.13.7 --allow-existing $venvDir
 if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }

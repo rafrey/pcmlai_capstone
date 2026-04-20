@@ -15,7 +15,7 @@ if ! command -v uv >/dev/null 2>&1; then
 fi
 
 echo "Creating or refreshing virtual environment at $venv_dir"
-uv venv --allow-existing "$venv_dir"
+uv venv --python 3.13.7 --allow-existing "$venv_dir"
 
 if [[ ! -x "$python_bin" ]]; then
     echo "Expected Python interpreter was not created at $python_bin." >&2
