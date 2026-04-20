@@ -7,7 +7,7 @@ $repoRoot = Split-Path -Parent $scriptDir
 $venvDir = Join-Path $repoRoot '.venv'
 
 if (-not ($env:OS -eq 'Windows_NT')) {
-    Write-Error 'scripts/install-dependencies.ps1 is intended for PowerShell on Windows. Use scripts/install-dependencies.sh on Linux, WSL2, or macOS.'
+    Write-Error 'scripts/install-dependencies.ps1 is intended for native Windows PowerShell. Use scripts/install-dependencies.sh on Linux, WSL2, or macOS.'
 }
 
 $uvCommand = Get-Command uv -ErrorAction SilentlyContinue

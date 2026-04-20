@@ -1,5 +1,9 @@
 # Redesigning the Federal Poverty Standard
 
+<a target="_blank" href="https://colab.research.google.com/github/rafrey/pcmlai_capstone/blob/main/capstone.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open this Notebook in Google Colab"/>
+</a>
+
 ## Mission & Project Context
 
 This project challenges and replaces the archaic 1960s Official Poverty Measure (OPM) with a modern, multidimensional "Capability Gap" machine learning model. The current OPM relies on a severely outdated heuristic that multiplies food costs by three, completely ignoring modern cost-of-living volatility such as rent, broadband, and healthcare.
@@ -7,7 +11,7 @@ This project challenges and replaces the archaic 1960s Official Poverty Measure 
 Key concepts driving this research include:
 
 * **The "Hidden Poor":** Families technically excluded by the federal poverty heuristic but who functionally have less than $0 in residual income after non-discretionary expenses.
-* **Proportional Context:** Leveraging Mean Absolute Percentage Error (MAPE) over absolute numbers to acknowledge that a $1,000 deficit is devastating to a $15,000 baseline, but mathematically negligible to a $150,000 baseline.
+* **Proportional Context:** Leveraging Symmetrical Mean Absolute Percentage Error (sMAPE) over absolute numbers to acknowledge that a $1,000 deficit is devastating to a $15,000 baseline, but mathematically negligible to a $150,000 baseline.
 * **The "In-Kind Paradox" (Benefit Cliffs):** Financial traps where accepting a small income raise accidentally disqualifies a household from critical aid, pushing them deeper into poverty.
 
 ## Agile CRISP-DM & Rapid Prototyping
@@ -41,7 +45,7 @@ During the Data Understanding and Preparation phases (Section 5 of `capstone.ipy
 
 * **The "Hidden Poor":** Baseline evaluations against the legacy Official Poverty Measure (OPM) identified that over **25% of the impoverished population** in our dataset are technically classified as "above poverty." However, when accounting for localized housing, health, and broadband costs, these households functionally possess a **negative residual income**.
 * **The "In-Kind Paradox" & Benefit Cliffs:** Bivariate analysis exposed severe welfare cliffs. SNAP (food stamp) utilization clusters tightly at the lowest incomes. As nominal income marginally exceeds aid thresholds, the automatic loss of benefits forces the entire burden of a rigid housing cost floor onto the household, resulting in an abrupt net-negative shift in true purchasing power.
-* **Non-Linear Capability Gaps:** Statistical tests using Dummy (MAPE > 312%) and Linear Regression (MAPE > 87%) baselines failed structurally. Linear models fail because financial decay is not a straight line; it features abrupt cliffs tied to fixed costs and aid disqualification. This scientifically justifies the deployment of Keras Neural Networks to capture these non-linear capability boundaries.
+* **Non-Linear Capability Gaps:** Statistical tests using Dummy (sMAPE > 312%) and Linear Regression (sMAPE > 87%) baselines failed structurally. Linear models fail because financial decay is not a straight line; it features abrupt cliffs tied to fixed costs and aid disqualification. This scientifically justifies the deployment of Keras Neural Networks to capture these non-linear capability boundaries.
 * **The Minimal Feature Set:** Feature engineering proved that a strictly limited 12-variable tensor (including income, housing costs, broadband/health status, and OECD-modified family size) is sufficient for high-fidelity capability monitoring. This directly addresses policy concerns regarding "administrative burden" by proving that modernizing poverty measurement does not require sweeping data collection.
 
 ## Workspace Structure
@@ -77,6 +81,7 @@ Ensure you have Python 3.10+ installed.
 
    ```bash
    pip install uv
+   uv python install 3.13.7
    ```
 
 ### Windows Native
@@ -92,7 +97,7 @@ Use this path if you want the simplest Windows-native setup and CPU execution is
 **Manual setup (PowerShell):**
 
 ```powershell
-uv venv .venv
+uv venv .venv --python 3.13.7
 .\.venv\Scripts\Activate.ps1
 uv pip install -r requirements.txt
 python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
@@ -115,7 +120,7 @@ The helper creates `.venv`, installs `requirements.txt`, probes whether TensorFl
 **Manual setup (bash/zsh):**
 
 ```bash
-uv venv .venv
+uv venv .venv --python 3.13.7
 source .venv/bin/activate
 uv pip install -r requirements.txt
 python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
@@ -139,7 +144,7 @@ Use this path if you want a local macOS environment and CPU execution is accepta
 **Manual setup (zsh/bash):**
 
 ```bash
-uv venv .venv
+uv venv .venv --python 3.13.7
 source .venv/bin/activate
 uv pip install -r requirements.txt
 python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
