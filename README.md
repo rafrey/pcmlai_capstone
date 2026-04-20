@@ -1,8 +1,6 @@
 # Redesigning the Federal Poverty Standard
 
-<a target="_blank" href="https://colab.research.google.com/github/rafrey/pcmlai_capstone/blob/main/capstone.ipynb">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open this Notebook in Google Colab"/>
-</a>
+[![Open this Notebook in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rafrey/pcmlai_capstone/blob/main/capstone.ipynb)
 
 ## Mission & Project Context
 
