@@ -7,7 +7,7 @@ $repoRoot = Split-Path -Parent $scriptDir
 $venvDir = Join-Path $repoRoot '.venv'
 
 if (-not ($env:OS -eq 'Windows_NT')) {
-    Write-Error 'scripts/install-dependencies.ps1 is intended for PowerShell on Windows. Use scripts/install-dependencies.sh on Linux, WSL2, or macOS.'
+    Write-Error 'scripts/install-dependencies.ps1 is intended for PowerShell (pwsh) on Windows. Use scripts/install-dependencies.sh on Linux, WSL2, or macOS.'
 }
 
 $uvCommand = Get-Command uv -ErrorAction SilentlyContinue
@@ -16,7 +16,7 @@ if (-not $uvCommand) {
 }
 
 Write-Host "Creating or refreshing virtual environment at $venvDir"
-& uv venv --allow-existing $venvDir
+& uv venv --python 3.13.7 --allow-existing $venvDir
 if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
