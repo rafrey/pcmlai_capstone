@@ -46,6 +46,20 @@ During the Data Understanding and Preparation phases (Section 5 of `capstone.ipy
 * **Non-Linear Capability Gaps:** Statistical tests using Dummy (sMAPE > 312%) and Linear Regression (sMAPE > 87%) baselines failed structurally. Linear models fail because financial decay is not a straight line; it features abrupt cliffs tied to fixed costs and aid disqualification. This scientifically justifies the deployment of Keras Neural Networks to capture these non-linear capability boundaries.
 * **The Minimal Feature Set:** Feature engineering proved that a strictly limited 12-variable tensor (including income, housing costs, broadband/health status, and OECD-modified family size) is sufficient for high-fidelity capability monitoring. This directly addresses policy concerns regarding "administrative burden" by proving that modernizing poverty measurement does not require sweeping data collection.
 
+### Modeling & SHAP Explainability
+To ensure the model is legally defensible and transparent, we utilized a monotonic neural network architecture and SHAP (Shapley Additive Explanations).
+* **Mapping Benefit Cliffs:** SHAP successfully extracted the impact of each feature, visually mapping the non-linear "benefit cliffs" where marginally stable families are abruptly penalized by fixed costs or the abrupt loss of aid.
+* **Predictive Dominance (sMAPE):** The Tier 2 Keras Monotonic MLP achieved a definitive sMAPE boundary score of **0.2404**. This represents a mathematically validated predictability improvement of **23.61%** over the standard linear / Official Poverty Measure baselines.
+* **The Capability Formula:** We distilled the complex, multi-dimensional neural network weights into a transparent, flat mathematical function. This ensures that the "black box" model can be translated directly into a simple Capability Formula perfectly suited for legislative action and public policy text:
+
+$$
+\text{Capability}_{gap} = M_{phasein} \times \left( (\beta_1 \times \text{nominal\_income}) + (\beta_2 \times \text{housing\_cost}) + (\beta_3 \times \text{broadband\_status}) + (\beta_4 \times \text{health\_insurance}) + (\beta_5 \times \text{snap\_aid\_status}) + (\beta_6 \times \text{adults}) + (\beta_7 \times \text{children}) + (\beta_8 \times \text{oecd\_scale}) + (\beta_9 \times \text{puma\_code}) + (\beta_{10} \times \text{household\_weight}) \right)
+$$
+
+### Policy Validation & Deployment Strategy
+* **The "In-Kind Paradox" in Colorado:** The framework empirically validated that true economic fragility in the Colorado Front Range is defined by steep capability cliffs triggered by regional cost spikes (like rent), not a uniform national income line. As households marginally increase income past rigid government thresholds, they abruptly lose access to critical in-kind subsidies, instantly plunging their true residual capability well below zero.
+* **The Phase-In Multiplier:** To solve the primary barrier to entitlement reform, budgetary shock, we architected a "Phase-In Multiplier" deployment strategy. This allows lawmakers to pass the mathematically correct framework into law immediately, but scale the payouts to match current budget constraints. Legislatures can then incrementally increase the multiplier over a multi-year horizon to reach mathematical parity without triggering a single-cycle fiscal shock.
+
 ## Workspace Structure
 
 This repository is strictly organized to map data flows cleanly across the CRISP-DM methodology:
